@@ -8,7 +8,6 @@ const PhotoList = (props) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect");
     callAPI();
   }, []);
 
@@ -20,7 +19,6 @@ const PhotoList = (props) => {
       let parseData = await data.json();
       setAPIData(parseData);
       setLoading(false);
-      console.log(apiData);
     } catch (error) {
       setError(error);
       setLoading(false);
