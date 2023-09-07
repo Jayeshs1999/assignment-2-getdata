@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PhotoItem from "../reusableComponents/PhotoItem";
 import Spinner from "../reusableComponents/Spinner";
+import axios from "axios";
 
 const PhotoList = (props) => {
   const [apiData, setAPIData] = useState([]);
@@ -13,12 +14,12 @@ const PhotoList = (props) => {
 
   const callAPI = async () => {
     try {
-      const url = `https://jsonplaceholder.typicode.com/photos`;
+      const url = `https://jsonplaceholder.typicode.com/posts`;
       setLoading(true);
-      let data = await fetch(url);
-      let parseData = await data.json();
-      setAPIData(parseData);
-      setLoading(false);
+      axios.get(url).then((res)=>{
+        setAPIData(res.data)
+        setLoading(false);
+      })
     } catch (error) {
       setError(error);
       setLoading(false);
